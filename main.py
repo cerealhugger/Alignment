@@ -21,5 +21,8 @@ def main():
     if valid_sequence(seq1) and valid_sequence(seq2):
         print_blank_alignment(seq1, seq2)
 
+    score = 0
+    print("Score: " + str(score))
+
 if __name__ == "__main__":
     main()

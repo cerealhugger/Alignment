@@ -7,14 +7,14 @@ def generate_matrix(rows, cols, default_value=0):
 
 def input_alignment_params():
     """
-    Ask the user for input: sequences, match score, mismatch score, and gap penalty.
+    Ask the user for input: match score, mismatch score, and gap penalty.
     """
     match_score = int(input("Enter the match score: "))
     mismatch_score = int(input("Enter the mismatch score: "))
     gap_penalty = int(input("Enter the gap penalty: "))
     return match_score, mismatch_score, gap_penalty
 
-def local_alignment(seq1, seq2, match_score=2, mismatch_score=-1, gap_penalty=-1):
+def local_alignment(seq1, seq2, match_score=1, mismatch_score=-1, gap_penalty=-2):
     """
     Perform Smith-Waterman alignment between two sequences.
     """
@@ -68,24 +68,44 @@ def traceback_alignment(scoring_matrix, traceback_matrix, seq1, seq2):
 
     return max_score, alignment_seq1, alignment_seq2
 
+def local_print_matrix(matrix, seq1, seq2):
+    # Create a shallow copy of the matrix
+    matrix_copy = [row[:] for row in matrix]
+
+    # Insert sequence 2 at the beginning of each row in the matrix
+    seq1_char = [' '] + [char for char in seq2]
+    seq2_char = [' '] + [char for char in seq1]
+    seq1_char[1] = '-'
+    seq2_char[1] = '-'
+
+    for i in range(len(matrix_copy)):
+        matrix_copy[i].insert(0, seq2_char[i])
+    matrix_copy.insert(0, seq1_char)
+
+    # Print the matrix
+    char_list = []
+    for row in matrix_copy:
+        for word in row:
+            char_list.append(str(word))
+    for i in range(0, len(char_list), len(seq1_char)):
+        group = char_list[i: i + len(seq1_char)]
+        print('   '.join(group))
+
 # Main program
 def main():
     seq1 = input("Enter a sequence: ")
     seq2 = input("Enter another sequence: ")
     match_score, mismatch_score, gap_penalty = input_alignment_params()
     scoring_matrix, traceback_matrix = local_alignment(seq1, seq2, match_score, mismatch_score, gap_penalty)
-    print("\nScoring Matrix:")
-    for row in scoring_matrix:
-        print(row)
-    '''
-    print("\nTraceback Matrix:")
-    for row in traceback_matrix:
-        print(row)
-    '''
+
     score, align1, align2 = traceback_alignment(scoring_matrix, traceback_matrix, seq1, seq2)
     print("\nAlignment Score:", score)
     print("Sequence 1:", align1)
     print("Sequence 2:", align2)
+
+    for row in scoring_matrix:
+        print(row)
+    local_print_matrix(scoring_matrix, seq1, seq2)
 
 if __name__ == "__main__":
     main()

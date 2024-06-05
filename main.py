@@ -4,6 +4,9 @@ def valid_sequence(seq):
             raise ValueError(f"Invalid character {char}")
     return True
 
+def hello():
+    print('hello Elaine')
+
 def initialize_matrix(seq1,seq2) -> list[list[str]]:
     matrix = [['-' for _ in range(len(seq1) + 1)] for _ in range(len(seq2) + 1)]
     for i in range(1, len(seq1) + 1):

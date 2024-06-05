@@ -39,7 +39,7 @@ def main():
 
         elif ans == "L":
             ans = input("Do you want to change default scoring scale? Type 'Y' or 'N' to continue: ")
-            if ans == 'Y':
+            if ans == 'N':
                 match_score = 1
                 mismatch_score = -1
                 gap_score = -2

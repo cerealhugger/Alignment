@@ -70,7 +70,9 @@ def traceback_alignment(scoring_matrix, traceback_matrix, seq1, seq2):
 
 # Main program
 def main():
-    seq1, seq2, match_score, mismatch_score, gap_penalty = input_alignment_params()
+    seq1 = input("Enter a sequence: ")
+    seq2 = input("Enter another sequence: ")
+    match_score, mismatch_score, gap_penalty = input_alignment_params()
     scoring_matrix, traceback_matrix = local_alignment(seq1, seq2, match_score, mismatch_score, gap_penalty)
     print("\nScoring Matrix:")
     for row in scoring_matrix:

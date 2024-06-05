@@ -68,21 +68,20 @@ def traceback_alignment(scoring_matrix, traceback_matrix, seq1, seq2):
 
     return max_score, alignment_seq1, alignment_seq2
 
-def local_print_matrix(matrix, seq1, seq2):
-    # Create a shallow copy of the matrix
-    matrix_copy = [row[:] for row in matrix]
-
+def local_print_matrix(matrix, seq2, seq1):
     # Insert sequence 2 at the beginning of each row in the matrix
-    seq1_char = [' '] + [char for char in seq2]
-    seq2_char = [' '] + [char for char in seq1]
-    seq1_char[1] = '-'
-    seq2_char[1] = '-'
+    matrix_copy = [row[:] for row in matrix]
+    seq1_char = [char for char in seq2]
+    seq2_char = [char for char in seq1]
+
+    seq1_char.insert(0, '-')
+    seq1_char.insert(0, ' ')
+    seq2_char.insert(0, '-')
 
     for i in range(len(matrix_copy)):
         matrix_copy[i].insert(0, seq2_char[i])
     matrix_copy.insert(0, seq1_char)
 
-    # Print the matrix
     char_list = []
     for row in matrix_copy:
         for word in row:
@@ -103,8 +102,6 @@ def main():
     print("Sequence 1:", align1)
     print("Sequence 2:", align2)
 
-    for row in scoring_matrix:
-        print(row)
     local_print_matrix(scoring_matrix, seq1, seq2)
 
 if __name__ == "__main__":

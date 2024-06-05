@@ -43,8 +43,7 @@ def main():
                 scoring_matrix, traceback_matrix = local_alignment(seq1, seq2)
             else:
                 match_score, mismatch_score, gap_penalty = input_alignment_params()
-                scoring_matrix, traceback_matrix = local_alignment(seq1, seq2, match_score,
-                                                                   mismatch_score, gap_penalty)
+                scoring_matrix, traceback_matrix = local_alignment(seq1, seq2, match_score, mismatch_score, gap_penalty)
             score, align1, align2 = traceback_alignment(scoring_matrix, traceback_matrix, seq1, seq2)
 
             local_print_matrix(scoring_matrix, seq1, seq2)

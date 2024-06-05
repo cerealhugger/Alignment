@@ -1,3 +1,4 @@
+"""nice"""
 def valid_sequence(seq):
     for char in seq:
         if char not in ['A','G','C','T']:

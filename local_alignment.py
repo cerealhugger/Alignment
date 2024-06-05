@@ -9,14 +9,12 @@ def input_alignment_params():
     """
     Ask the user for input: sequences, match score, mismatch score, and gap penalty.
     """
-    seq1 = input("Enter the first sequence: ")
-    seq2 = input("Enter the second sequence: ")
     match_score = int(input("Enter the match score: "))
     mismatch_score = int(input("Enter the mismatch score: "))
     gap_penalty = int(input("Enter the gap penalty: "))
-    return seq1, seq2, match_score, mismatch_score, gap_penalty
+    return match_score, mismatch_score, gap_penalty
 
-def smith_waterman(seq1, seq2, match_score=2, mismatch_score=-1, gap_penalty=-1):
+def local_alignment(seq1, seq2, match_score=2, mismatch_score=-1, gap_penalty=-1):
     """
     Perform Smith-Waterman alignment between two sequences.
     """
@@ -73,13 +71,15 @@ def traceback_alignment(scoring_matrix, traceback_matrix, seq1, seq2):
 # Main program
 def main():
     seq1, seq2, match_score, mismatch_score, gap_penalty = input_alignment_params()
-    scoring_matrix, traceback_matrix = smith_waterman(seq1, seq2, match_score, mismatch_score, gap_penalty)
+    scoring_matrix, traceback_matrix = local_alignment(seq1, seq2, match_score, mismatch_score, gap_penalty)
     print("\nScoring Matrix:")
     for row in scoring_matrix:
         print(row)
+    '''
     print("\nTraceback Matrix:")
     for row in traceback_matrix:
         print(row)
+    '''
     score, align1, align2 = traceback_alignment(scoring_matrix, traceback_matrix, seq1, seq2)
     print("\nAlignment Score:", score)
     print("Sequence 1:", align1)

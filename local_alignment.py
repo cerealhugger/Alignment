@@ -1,23 +1,13 @@
 def generate_matrix(rows, cols, default_value=0):
-    """
-    Generate a matrix with the specified number of rows and columns,
-    initialized with a default value.
-    """
     return [[default_value] * cols for _ in range(rows)]
 
 def input_alignment_params():
-    """
-    Ask the user for input: match score, mismatch score, and gap penalty.
-    """
     match_score = int(input("Enter the match score: "))
     mismatch_score = int(input("Enter the mismatch score: "))
     gap_penalty = int(input("Enter the gap penalty: "))
     return match_score, mismatch_score, gap_penalty
 
 def local_alignment(seq1, seq2, match_score=1, mismatch_score=-1, gap_penalty=-2):
-    """
-    Perform Smith-Waterman alignment between two sequences.
-    """
     # Initialize the scoring matrix
     rows = len(seq1) + 1
     cols = len(seq2) + 1
@@ -41,10 +31,6 @@ def local_alignment(seq1, seq2, match_score=1, mismatch_score=-1, gap_penalty=-2
     return scoring_matrix, traceback_matrix
 
 def traceback_alignment(scoring_matrix, traceback_matrix, seq1, seq2):
-    """
-    Traceback to find the optimal alignment.
-    """
-    rows, cols = len(scoring_matrix), len(scoring_matrix[0])
     max_score = max(max(row) for row in scoring_matrix)
     max_i, max_j = max((i, j) for i, row in enumerate(scoring_matrix) for j, score in enumerate(row) if score == max_score)
 

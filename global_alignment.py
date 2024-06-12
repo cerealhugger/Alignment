@@ -44,6 +44,7 @@ class GlobalAlignment():
 
                 self.matrix[i][j] = Node(best_score, prev)
         self.score = self.matrix[len(self.seq2)][len(self.seq1)].val
+        
     def generate_matrix(self):
         self._init_matrix()
         self._fill_matrix()

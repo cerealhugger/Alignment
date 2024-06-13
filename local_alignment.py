@@ -32,7 +32,8 @@ def local_alignment(seq1, seq2, match_score=1, mismatch_score=-1, gap_penalty=-2
 
 def traceback_alignment(scoring_matrix, traceback_matrix, seq1, seq2):
     max_score = max(max(row) for row in scoring_matrix)
-    max_i, max_j = max((i, j) for i, row in enumerate(scoring_matrix) for j, score in enumerate(row) if score == max_score)
+    max_i, max_j = max((i, j) for i, row in enumerate(scoring_matrix) for j,
+    score in enumerate(row) if score == max_score)
 
     alignment_seq1 = ''
     alignment_seq2 = ''

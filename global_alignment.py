@@ -54,7 +54,7 @@ class GlobalAlignment():
         i, j = len(self.seq2), len(self.seq1)
         current_cell = self.matrix[i][j]
 
-        while current_cell.prev is not None and current_cell.prev is not None:
+        while type(current_cell)==Node and current_cell.prev is not None:
             if current_cell.prev == self.matrix[i - 1][j - 1]:  # match/mismatch
                 self.aligned_seq1.append(self.seq1[j-1])
                 self.aligned_seq2.append(self.seq2[i-1])

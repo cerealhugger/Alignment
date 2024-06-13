@@ -79,6 +79,7 @@ def local_print_matrix(matrix, seq2, seq1):
 
 # Main program
 def main():
+    print(generate_matrix(5, 5))
     seq1 = input("Enter a sequence: ")
     seq2 = input("Enter another sequence: ")
     match_score, mismatch_score, gap_penalty = input_alignment_params()
